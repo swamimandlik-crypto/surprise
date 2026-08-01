@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Friendship Day 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(135deg,#ffd6e7,#ffeaf3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+/* Floating Hearts */
+
+.heart{
+    position:absolute;
+    color:#ff6fa3;
+    font-size:20px;
+    animation:float 8s linear infinite;
+    opacity:.6;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+    20%{
+        opacity:.7;
+    }
+    to{
+        transform:translateY(-20vh);
+        opacity:0;
+    }
+}
+
+/* Button */
+
+#btn{
+    position:absolute;
+    padding:15px 35px;
+    border:none;
+    border-radius:40px;
+    background:white;
+    color:#ff4f87;
+    font-size:20px;
+    font-weight:bold;
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
+    cursor:pointer;
+    transition:.25s;
+    animation:bounce 1.4s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+}
+
+#btn:active{
+    transform:scale(.95);
+}
+
+/* Message */
+
+#message{
+    display:none;
+    width:88%;
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(12px);
+    border-radius:25px;
+    padding:30px;
+    text-align:center;
+    color:#d6336c;
+    box-shadow:0 15px 30px rgba(0,0,0,.15);
+    animation:popup .6s ease;
+}
+
+#message h2{
+    margin-bottom:18px;
+}
+
+#message p{
+    font-size:18px;
+    line-height:1.7;
+}
+
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:scale(.7);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* Footer */
+
+footer{
+    position:absolute;
+    bottom:18px;
+    width:100%;
+    text-align:center;
+    color:#d6336c;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* Confetti */
+
+.confetti{
+    position:absolute;
+    width:10px;
+    height:10px;
+    animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-10vh) rotate(0deg);
+    }
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<button id="btn">💌 Click Here</button>
+
+<div id="message">
+<h2>Happy Friendship Day! 💖</h2>
+
+<p>
+Friends make every ordinary day special.
+Thank you for being a part of my life,
+for the laughs, and smiles.
+<br><br>
+<b>Happy Friendship Day! 💖</b>
+</p>
+
+</div>
+
+<footer>
+Made by Swami
+</footer>
+
+<script>
+
+const btn=document.getElementById("btn");
+const msg=document.getElementById("message");
+
+let clickCount=0;
+
+btn.style.left=(window.innerWidth/2-75)+"px";
+btn.style.top=(window.innerHeight/2-30)+"px";
+
+btn.onclick=function(){
+
+clickCount++;
+
+if(clickCount<4){
+
+const x=Math.random()*(window.innerWidth-170);
+const y=Math.random()*(window.innerHeight-90);
+
+btn.style.left=x+"px";
+btn.style.top=y+"px";
+
+if(clickCount==3){
+btn.innerHTML="😜 Catch Me!";
+}
+
+}
+else{
+
+btn.style.display="none";
+msg.style.display="block";
+
+createConfetti();
+
+}
+
+}
+
+function createConfetti(){
+
+const colors=["#ff4f87","#ff9ec4","#ffd166","#7bdff2","#cdb4db"];
+
+for(let i=0;i<120;i++){
+
+let c=document.createElement("div");
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+c.style.background=colors[Math.floor(Math.random()*colors.length)];
+c.style.animationDuration=(2+Math.random()*2)+"s";
+
+document.body.appendChild(c);
+
+setTimeout(()=>{
+c.remove();
+},4000);
+
+}
+
+}
+
+function createHearts(){
+
+setInterval(()=>{
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+heart.innerHTML="💖";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(16+Math.random()*18)+"px";
+heart.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},10000);
+
+},500);
+
+}
+
+createHearts();
+
+</script>
+
+</body>
+</html>
